@@ -1,6 +1,6 @@
 <#
 .NOTES      
-    File Name		: SIGAR-Get-NewUsersReport.ps1
+    File Name		: Get-NewADUsersReport.ps1
     Version     	: 1.0
     Date		: 1/5/2017   
     Author		: Bryce Harding
@@ -27,7 +27,7 @@
     Information emailed to recipient(s)
 
 .EXAMPLE (Run Script)
-	.\SIGAR-Get-NewUserReport.ps1
+	.\Get-NewADUserReport.ps1
 		
 .EXAMPLE (Note: Function or Cmdlet "Get-NewUserReport" will be available until PowerShell session ends.
 	Get-NewUserReport 
@@ -46,8 +46,8 @@ Param (
 	[string]$To = (Read-Host -Prompt "Report MailTo"),
     #[int]$Age = 18,
 	#[string]$To = "sigaralerts@accelerasolutions.com",
-	[string]$From = "admin@sigargov.onmicrosoft.com",
-	[string]$SMTPServer = "smtp.sigar.gov",
+	[string]$From = "admin@accelera.onmicrosoft.com",
+	[string]$SMTPServer = "smtp.accelera.com",
     [int]$Port = 25
 )
 
@@ -67,14 +67,14 @@ $ParentOU = @{Name='ParentOU'; Expression={ Get-ParentOU $_.DistinguishedName } 
 $Then = (Get-Date).AddDays(-$Age).Date
 
 #Filter only enabled user created whencreated ($Age = X)
-$Users = Get-ADUser -Server SIGAR-DC01.sigar.gov -Filter {(Enabled -eq "True") -and (whenCreated -ge $Then)} -Properties whenCreated, DisplayName, proxyaddresses 
+$Users = Get-ADUser -Server Accelera-DC01.accelera.com -Filter {(Enabled -eq "True") -and (whenCreated -ge $Then)} -Properties whenCreated, DisplayName, proxyaddresses 
 
 # Create HTML Message
 
 $SMTPProperties = @{
 	From = $From
 	To = $To
-	Subject = "SIGAR New Users Created Since $Then"
+	Subject = "Accelera New Users Created Since $Then"
 	SMTPServer = $SMTPServer
     UseSSL = $UseSSL
     Port = $Port
@@ -109,4 +109,4 @@ Catch {
 }
 # End of Script
 
-Get-NewUserReport
+Get-NewADUserReport

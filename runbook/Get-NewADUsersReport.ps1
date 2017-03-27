@@ -12,8 +12,8 @@
     Script created to generate reports of recently created AD User Objects.
 
 .DESCRIPTION
-    This function "Get-NewUserReport" will generate a report of new Active Directory user accounts created in number of days (X value) 
-    and email the report from admin@sigargov.onmicrosoft.com and to the recipient specified when prompted. 
+    This function "Get-NewADUserReport" will generate a report of new Active Directory user accounts created in number of days (X value) 
+    and email the report from admin@accelera.onmicrosoft.com and to the recipient specified when prompted. 
     Script could be helpful for user migrations, AD cleanup, security and naming convention quality assurance.
 
 .LINK
@@ -29,8 +29,8 @@
 .EXAMPLE (Run Script)
 	.\Get-NewADUserReport.ps1
 		
-.EXAMPLE (Note: Function or Cmdlet "Get-NewUserReport" will be available until PowerShell session ends.
-	Get-NewUserReport 
+.EXAMPLE (Note: Function or Cmdlet "Get-NewADUserReport" will be available until PowerShell session ends.
+	Get-NewADUserReport 
 	
 .PARAMETER
     None
